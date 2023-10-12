@@ -2,9 +2,9 @@ using System.IO;
 
 namespace Full_GRASP_And_SOLID
 {
-    public class FilePrinter : IPrinter
+    public class FilePrinter : Printer
     {
-        public void PrintRecipe(Recipe recipe)
+        public static new void PrintRecipe(Recipe recipe)
         {
             File.WriteAllText("Recipe.txt", recipe.GetTextToPrint());
         }

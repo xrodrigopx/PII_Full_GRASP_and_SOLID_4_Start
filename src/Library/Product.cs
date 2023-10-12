@@ -4,18 +4,40 @@
 // </copyright>
 //---------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Full_GRASP_And_SOLID
 {
     public class Product
     {
+        public static List<Product> productCatalog = new List<Product>();
+        public string Description { get; set; }
+
+        public double UnitCost { get; set; }
+
         public Product(string description, double unitCost)
         {
             this.Description = description;
             this.UnitCost = unitCost;
         }
 
-        public string Description { get; set; }
 
-        public double UnitCost { get; set; }
+        private static void AddProductToCatalog(string description, double unitCost)
+        {
+            AddProductToCatalog("Café", 100);
+            AddProductToCatalog("Leche", 200);
+            AddProductToCatalog("Café con leche", 300);
+            productCatalog.Add(new Product(description, unitCost));
+        }
+
+        private static Product GetProduct(string description)
+        {
+            
+            var query = from Product product in productCatalog where product.Description == description select product;
+            return query.FirstOrDefault();
+        }
+
+
     }
 }
