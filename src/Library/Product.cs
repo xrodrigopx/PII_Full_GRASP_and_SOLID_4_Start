@@ -23,21 +23,14 @@ namespace Full_GRASP_And_SOLID
         }
 
 
-        private static void AddProductToCatalog(string description, double unitCost)
+        private static List<Product> AddProductToCatalog(string description, double unitCost)
         {
             AddProductToCatalog("Café", 100);
             AddProductToCatalog("Leche", 200);
             AddProductToCatalog("Café con leche", 300);
             productCatalog.Add(new Product(description, unitCost));
+            return productCatalog;
         }
-
-        private static Product GetProduct(string description)
-        {
-            
-            var query = from Product product in productCatalog where product.Description == description select product;
-            return query.FirstOrDefault();
-        }
-
 
     }
 }

@@ -13,11 +13,21 @@ namespace Full_GRASP_And_SOLID
     {
         private IList<Step> steps = new List<Step>();
 
-        public Product FinalProduct { get; set; }
 
         public void AddStep(Step step)
         {
-            this.steps.Add(step);
+            recipe.AddStep(new Step(GetProduct("Café"), 100, GetEquipment("Cafetera"), 120));
+            recipe.AddStep(new Step(GetProduct("Leche"), 200, GetEquipment("Hervidor"), 60));
+        }
+
+        private Equipment GetEquipment(string v)
+        {
+            throw new NotImplementedException();
+        }
+
+        private Product GetProduct(string v)
+        {
+            throw new NotImplementedException();
         }
 
         public void RemoveStep(Step step)
@@ -28,7 +38,8 @@ namespace Full_GRASP_And_SOLID
         // Agregado por SRP
         public string GetTextToPrint()
         {
-            string result = $"Receta de {this.FinalProduct.Description}:\n";
+            FinalProduct finalProduct = new FinalProduct("Café con leche", 0);
+            string result = $"Receta de {finalProduct.Description}:\n";
             foreach (Step step in this.steps)
             {
                 result = result + step.GetTextToPrint() + "\n";
@@ -51,6 +62,19 @@ namespace Full_GRASP_And_SOLID
             }
 
             return result;
+        }
+
+        Recipe recipe = new Recipe();
+
+        private class FinalProduct : Product
+        {
+            public FinalProduct(string description, double unitCost)
+                : base(description, unitCost)
+            {
+                this.Description = description;
+            }
+
+            
         }
     }
 }
